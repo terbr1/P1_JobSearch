@@ -8,8 +8,10 @@
 </head>
 <body>
 <!-- HTML to create Nav Bar -->
-  <div class="ui stackable menu">
-    <div class="header item"> Software Developers Job Search</div>
+  <div class="ui fixed inverted stackable menu">
+    <div class="ui header borderless item"> 
+      <i class="computer icon"></i>Software Developers Job Search
+    </div>
     <div class="right menu">
       <a class="item" href="./index.html">
         <i class="home icon"></i> Home
@@ -24,6 +26,43 @@
   </div>
 <!-- End Nav Bar HTML -->
 
+<!-- HTML to create Contact Us contents -->
+  <div class="ui main text container">
+    <h3 class="ui block header">
+      <i class="mail icon"></i>Contact Us
+    </h3>
+    <div class="ui equal width form">
+      <div class="fields">
+        <div class="field">
+          <label>First Name</label>
+          <input type="text" placeholder="First Name">
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" placeholder="Last Name">
+        </div>
+      </div>
+      <div class="fields">
+        <div class="field">
+          <label>Company Name</label>
+          <input type="text" placeholder="Comany Name">
+        </div>
+        <div class="field">
+          <label>Phone Number</label>
+          <input type="text" placeholder="(123)456-7890">
+        </div>
+      </div>
+      <div class="field">
+        <label>E-mail</label>
+        <input type="email" placeholder="joe@schmoe.com">
+      </div>
+      <div class="field">
+        <label>What's Up?</label>
+        <textarea></textarea>
+      </div>
+      <div class="ui submit button">Submit</div>
+    </div>
+  </div>
 
 <!-- Links for Fomantic library, Jquery, internal JS -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
