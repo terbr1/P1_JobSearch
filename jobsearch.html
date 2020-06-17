@@ -32,6 +32,74 @@
       <!-- HTML to create the search parameter funtionality -->
       <div class="four wide column">
         <h3>Search Parameters Go Here</h3>
+        <form class="ui form">
+          <!-- keyword entry field -->
+          <div class="field">
+            <label>Keywords</label>
+            <input type="text" name="keywords" placeholder="Keywords">
+          </div>
+          <!-- zipcode entry field -->
+          <div class="field">
+            <label>ZIP Code</label>
+            <input type="text" name="zipcode" placeholder="12345">
+          </div>
+          <!-- employment check boxes -->
+          <div class="grouped fields">
+            <label>Employment Type</label>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="employment">
+                <label>Full Time</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="employment">
+                <label>Part Time</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="employment">
+                <label>Freelance</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="employment" checked="checked">
+                <label>Any Type</label>
+              </div>
+            </div>
+          </div>
+          <div class="grouped fields">
+            <label>Commute Distance</label>
+            <div class="field">
+              <div class="ui slider checkbox">
+                <input type="radio" name="commute" checked="checked">
+                <label>Work from Home</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui slider checkbox">
+                <input type="radio" name="commute">
+                <label>10 miles or less</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui slider checkbox">
+                <input type="radio" name="commute">
+                <label>20 miles or less</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui slider checkbox checked">
+                <input type="radio" name="commute">
+                <label>Any Distance</label>
+              </div>
+            </div>
+          </div>
+          <button class="ui button" type="submit">Submit</button>
+        </form>
       </div>
       <!-- HTML to create a space for the search results to be displayed -->
       <div class="twelve wide column">
