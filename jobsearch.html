@@ -36,7 +36,7 @@
           <!-- keyword entry field -->
           <div class="field">
             <label>Keywords</label>
-            <input type="text" name="keywords" placeholder="Keywords">
+            <input type="text" name="keywords" placeholder="Keywords" id="keywords">
           </div>
           <!-- zipcode entry field -->
           <div class="field">
@@ -98,12 +98,13 @@
               </div>
             </div>
           </div>
-          <button class="ui button" type="submit">Submit</button>
+          <button class="ui button" type="submit" id="submitBtn">Submit</button>
         </form>
       </div>
       <!-- HTML to create a space for the search results to be displayed -->
       <div class="twelve wide column">
         <h3>Search Results Are Displayed Here</h3>
+        <div id="results"></div>
       </div>
     </div>
   </div>
