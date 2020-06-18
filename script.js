@@ -29,11 +29,11 @@ function runSearch(){
     //Variable will dynamically change based on user input
     let jobType = $("#keywords").val();
     
-    console.log(jobType);
+    console.log(typeof(jobType));
 
     var queryURLJobs = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${jobType}&page=1`
 
-    console.log('query is: ', queryURLJobs);
+    //console.log('query is: ', queryURLJobs);
 
     //AJAX Call to GitHub Jobs API
     $.ajax({
@@ -41,10 +41,6 @@ function runSearch(){
         method: "GET",
     }).then(function(response) {
         //console.log(response);
-
-        //let description = response[0].description;
-
-        //let smallDescription = description.slice(0, 128);
 
         //For loop to run through first five jobs that come up
         for(var i = 0; i < 5; i++) {
@@ -77,7 +73,7 @@ function runSearch(){
                 url: queryURLNews,
                 method: "GET"
             }).then(function(response) {
-                console.log(response);
+                //console.log(response);
             });
         };
 
@@ -94,9 +90,36 @@ function runSearch(){
     
             //Create h5 for every job company
             let resultCompany = $("<h5>");
+
+            //Create container div for every job description
+            let descriptionContainer = $("<div>");
+
+            //Give the container div a class of "ui styled accordion"
+            descriptionContainer.addClass("ui styled accordion");
+
+            //Crate new div for title
+            let descriptionTitleDiv = $("<div>");
+
+            //Add class to title div
+            descriptionTitleDiv.addClass("title");
+
+            //Populate title div text with "full description"
+            descriptionTitleDiv.text("Full Description");
+
+            //Append title div to container div
+            descriptionContainer.append(descriptionTitleDiv);
+
+            //Create new div for content
+            let descriptionContentDiv = $("<div>");
+
+            //Give content div class of content
+            descriptionContentDiv.addClass("content");
     
             //Create p for every job description
             let resultDescription = $("<p>");
+
+            //Give each p tag a class of description
+            //resultDescription.addClass("description");
     
             //Populate each h1 with the job titles in jobTitles array
             resultTitles.text(jobTitles[i]);
@@ -111,14 +134,20 @@ function runSearch(){
             resultCompany.text("Company: " + jobCompanies[i]);
     
             //Populate each p with the job description in jobDescriptions array
-            resultDescription.append("Description: " + jobDescriptions[i]);
+            resultDescription.append(jobDescriptions[i]);
+
+            //Append resultDescription to content div
+            descriptionContentDiv.append(resultDescription);
+
+            //Append content div to container div
+            descriptionContainer.append(descriptionContentDiv);
     
             //Append to the results div
             $("#results").append(resultTitles);
             $("#results").append(resultLocation);
             $("#results").append(resultType);
             $("#results").append(resultCompany);
-            $("#results").append(resultDescription);
+            $("#results").append(descriptionContainer);
         };
     });
 };
