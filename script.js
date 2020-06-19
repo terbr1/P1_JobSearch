@@ -12,11 +12,11 @@ $("#submitBtn").click(function(e){
     $("#results").empty();
 
     //Empty job arrays with each new search
-    jobTitles = [];
-    jobLocations = [];
-    jobTypes = [];
-    jobCompanies = [];
-    jobDescriptions = [];
+    _.remove(jobTitles);
+    _.remove(jobLocations);
+    _.remove(jobTypes);
+    _.remove(jobCompanies);
+    _.remove(jobDescriptions);
 
     //Invoke runSearch function
     runSearch();
@@ -28,12 +28,8 @@ function runSearch(){
 
     //Variable will dynamically change based on user input
     let jobType = $("#keywords").val();
-    
-    console.log(typeof(jobType));
 
     var queryURLJobs = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${jobType}&page=1`
-
-    //console.log('query is: ', queryURLJobs);
 
     //AJAX Call to GitHub Jobs API
     $.ajax({
@@ -95,7 +91,7 @@ function runSearch(){
             let descriptionContainer = $("<div>");
 
             //Give the container div a class of "ui styled accordion"
-            descriptionContainer.addClass("ui styled accordion");
+            descriptionContainer.addClass("ui styled fluid accordion");
 
             //Crate new div for title
             let descriptionTitleDiv = $("<div>");
