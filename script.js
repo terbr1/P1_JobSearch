@@ -149,6 +149,7 @@ function runSearch(){
             $("#results").append(resultType);
             $("#results").append(resultCompany);
             $("#results").append(descriptionContainer);
+            $("#results").accordion("refresh");
         };
     });
 };
