@@ -27,42 +27,44 @@
 <!-- End Nav Bar HTML -->
 
 <!-- HTML to create Contact Us contents -->
-  <div class="ui main text container">
-    <h3 class="ui block header">
-      <i class="mail icon"></i>Contact Us
-    </h3>
-    <div class="ui equal width form">
-      <div class="fields">
-        <div class="field">
-          <label>First Name</label>
-          <input type="text" placeholder="First Name">
-        </div>
-        <div class="field">
-          <label>Last Name</label>
-          <input type="text" placeholder="Last Name">
-        </div>
-      </div>
-      <div class="fields">
-        <div class="field">
-          <label>Company Name</label>
-          <input type="text" placeholder="Company Name">
-        </div>
-        <div class="field">
-          <label>Phone Number</label>
-          <input type="text" placeholder="(123)456-7890">
-        </div>
+<div class="ui main text container">
+  <h3 class="ui block header">
+    <i class="mail icon"></i>Contact Us
+  </h3>
+  <div class="ui equal width form">
+    <form id="contact-form" method="post" action="contact-form-handler.php">
+    <div class="fields">
+      <div class="field">
+        <label>First Name</label>
+        <input name="firstName" type="text" placeholder="First Name" required> 
       </div>
       <div class="field">
-        <label>E-mail</label>
-        <input type="email" placeholder="joe@schmoe.com">
+        <label>Last Name</label>
+        <input name="lastName" type="text" placeholder="Last Name" required>
       </div>
-      <div class="field">
-        <label>What's Up?</label>
-        <textarea></textarea>
-      </div>
-      <div class="ui submit button">Submit</div>
     </div>
+    <div class="fields">
+      <div class="field">
+        <label>Company Name</label>
+        <input name="companyName" type="text" placeholder="Company Name">
+      </div>
+      <div class="field">
+        <label>Phone Number</label>
+        <input name="phoneNumber" type="text" placeholder="(123)456-7890">
+      </div>
+    </div>
+    <div class="field">
+      <label>E-mail</label>
+      <input name="visitorEmail" type="email" placeholder="joe@schmoe.com" required>
+    </div>
+    <div class="field">
+      <label>What's Up?</label>
+      <textarea name="message" required></textarea>
+    </div>
+    <div class="ui submit button">Submit</div>
+  </form>
   </div>
+</div>
 
 <!-- Links for Fomantic library, Jquery, internal JS -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
