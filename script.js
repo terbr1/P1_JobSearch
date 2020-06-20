@@ -1,7 +1,5 @@
 // Accordion Function
-$('.ui.accordion')
-  .accordion()
-;
+$(".ui.accordion").accordion();
 
 //Creating arrays to organize and store search results
 let jobTitles = [];
@@ -10,146 +8,166 @@ let jobTypes = [];
 let jobCompanies = [];
 let jobDescriptions = [];
 
-$("#submitBtn").click(function(e){
-    e.preventDefault();
+$("#submitBtn").click(function (e) {
+  e.preventDefault();
 
-    //Empty results div with each new search
-    $("#results").empty();
+  //Empty results div with each new search
+  $("#results").empty();
 
-    //Empty job arrays with each new search
-    _.remove(jobTitles);
-    _.remove(jobLocations);
-    _.remove(jobTypes);
-    _.remove(jobCompanies);
-    _.remove(jobDescriptions);
+  //Empty job arrays with each new search
+  _.remove(jobTitles);
+  _.remove(jobLocations);
+  _.remove(jobTypes);
+  _.remove(jobCompanies);
+  _.remove(jobDescriptions);
 
-    //Invoke runSearch function
-    runSearch();
+  //Invoke runSearch function
+  runSearch();
 });
 
 //Function to run search
-function runSearch(){
-    //GitHub Jobs
+function runSearch() {
+  //GitHub Jobs
 
-    //Variable will dynamically change based on user input
-    let jobType = $("#keywords").val();
+  //Variable will dynamically change based on user input
+  let jobType = $("#keywords").val();
 
-    var queryURLJobs = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${jobType}&page=1`
+  var queryURLJobs = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${jobType}&page=1`;
 
-    //AJAX Call to GitHub Jobs API
-    $.ajax({
-        url: queryURLJobs,
+  //AJAX Call to GitHub Jobs API
+  $.ajax({
+    url: queryURLJobs,
+    method: "GET",
+  }).then(function (response) {
+    //console.log(response);
+
+    //For loop to run through first five jobs that come up
+    for (var i = 0; i < 5; i++) {
+      let titles = response[i].title;
+      jobTitles.push(titles);
+
+      let location = response[i].location;
+      jobLocations.push(location);
+
+      let type = response[i].type;
+      jobTypes.push(type);
+
+      let company = response[i].company;
+      jobCompanies.push(company);
+
+      let description = response[i].description;
+      jobDescriptions.push(description);
+
+      //GNews
+
+      //Take company from GitHub Jobs API and use it to run search on GNews API
+      let query = company;
+
+      let token = "561ded44bea85bd1b3058e9aeb6484da";
+
+      let queryURLNews =
+        "https://gnews.io/api/v3/search?q=" + query + "&token=" + token;
+
+      //AJAX Call to GNews API
+      $.ajax({
+        url: queryURLNews,
         method: "GET",
-    }).then(function(response) {
+      }).then(function (response) {
         //console.log(response);
+      });
+    }
 
-        //For loop to run through first five jobs that come up
-        for(var i = 0; i < 5; i++) {
-            let titles = response[i].title;
-            jobTitles.push(titles);
-            
-            let location = response[i].location;
-            jobLocations.push(location);
-            
-            let type = response[i].type;
-            jobTypes.push(type);
+    //Populating HTML elements with data from GitHub Jobs API
+    for (var i = 0; i < 5; i++) {
+      //Create an h1 for every job title
+      let resultTitles = $("<h1>");
 
-            let company = response[i].company;
-            jobCompanies.push(company);
+      //Create h5 for every job location
+      let resultLocation = $("<h5>");
 
-            let description = response[i].description;
-            jobDescriptions.push(description);
+      //Create h5 for every job type
+      let resultType = $("<h5>");
 
-            //GNews
+      //Create h5 for every job company
+      let resultCompany = $("<h5>");
 
-            //Take company from GitHub Jobs API and use it to run search on GNews API
-            let query = company;
+      //Create container div for every job description
+      let descriptionContainer = $("<div>");
 
-            let token = "561ded44bea85bd1b3058e9aeb6484da";
+      //Give the container div a class of "ui styled accordion"
+      descriptionContainer.addClass("ui styled fluid accordion");
 
-            let queryURLNews = "https://gnews.io/api/v3/search?q=" + query + "&token=" + token;
+      //Crate new div for title
+      let descriptionTitleDiv = $("<div>");
 
-            //AJAX Call to GNews API
-            $.ajax({
-                url: queryURLNews,
-                method: "GET"
-            }).then(function(response) {
-                //console.log(response);
-            });
-        };
+      //Add class to title div
+      descriptionTitleDiv.addClass("title");
 
-        //Populating HTML elements with data from GitHub Jobs API
-        for (var i = 0; i < 5; i++){
-            //Create an h1 for every job title
-            let resultTitles = $("<h1>");
-    
-            //Create h5 for every job location
-            let resultLocation = $("<h5>");
-    
-            //Create h5 for every job type
-            let resultType = $("<h5>");
-    
-            //Create h5 for every job company
-            let resultCompany = $("<h5>");
+      //Populate title div text with "full description"
+      descriptionTitleDiv.text("Full Description");
 
-            //Create container div for every job description
-            let descriptionContainer = $("<div>");
+      //Append title div to container div
+      descriptionContainer.append(descriptionTitleDiv);
 
-            //Give the container div a class of "ui styled accordion"
-            descriptionContainer.addClass("ui styled fluid accordion");
+      //Create new div for content
+      let descriptionContentDiv = $("<div>");
 
-            //Crate new div for title
-            let descriptionTitleDiv = $("<div>");
+      //Give content div class of content
+      descriptionContentDiv.addClass("content");
 
-            //Add class to title div
-            descriptionTitleDiv.addClass("title");
+      //Create p for every job description
+      let resultDescription = $("<p>");
 
-            //Populate title div text with "full description"
-            descriptionTitleDiv.text("Full Description");
+      //Give each p tag a class of description
+      //resultDescription.addClass("description");
 
-            //Append title div to container div
-            descriptionContainer.append(descriptionTitleDiv);
+      //Populate each h1 with the job titles in jobTitles array
+      resultTitles.text(jobTitles[i]);
 
-            //Create new div for content
-            let descriptionContentDiv = $("<div>");
+      //Populate each h5 with the job locations in jobLocations array
+      resultLocation.text("Location: " + jobLocations[i]);
 
-            //Give content div class of content
-            descriptionContentDiv.addClass("content");
-    
-            //Create p for every job description
-            let resultDescription = $("<p>");
+      //Populate each h5 with the job type in jobTypes array
+      resultType.text("Type: " + jobTypes[i]);
 
-            //Give each p tag a class of description
-            //resultDescription.addClass("description");
-    
-            //Populate each h1 with the job titles in jobTitles array
-            resultTitles.text(jobTitles[i]);
-    
-            //Populate each h5 with the job locations in jobLocations array
-            resultLocation.text("Location: " + jobLocations[i]);
-    
-            //Populate each h5 with the job type in jobTypes array
-            resultType.text("Type: " + jobTypes[i]);
-    
-            //Populate each h5 with the job company in jobCompanies array
-            resultCompany.text("Company: " + jobCompanies[i]);
-    
-            //Populate each p with the job description in jobDescriptions array
-            resultDescription.append(jobDescriptions[i]);
+      //Populate each h5 with the job company in jobCompanies array
+      resultCompany.text("Company: " + jobCompanies[i]);
 
-            //Append resultDescription to content div
-            descriptionContentDiv.append(resultDescription);
+      //Populate each p with the job description in jobDescriptions array
+      resultDescription.append(jobDescriptions[i]);
 
-            //Append content div to container div
-            descriptionContainer.append(descriptionContentDiv);
-    
-            //Append to the results div
-            $("#results").append(resultTitles);
-            $("#results").append(resultLocation);
-            $("#results").append(resultType);
-            $("#results").append(resultCompany);
-            $("#results").append(descriptionContainer);
-            $("#results").accordion("refresh");
-        };
-    });
-};
+      //Append resultDescription to content div
+      descriptionContentDiv.append(resultDescription);
+
+      //Append content div to container div
+      descriptionContainer.append(descriptionContentDiv);
+
+      //Append to the results div
+      $("#results").append(resultTitles);
+      $("#results").append(resultLocation);
+      $("#results").append(resultType);
+      $("#results").append(resultCompany);
+      $("#results").append(descriptionContainer);
+      $("#results").accordion("refresh");
+    }
+  });
+
+  //Get Zip API Search
+  let apiKey =
+    "GXiB3oQgyIIViku46eu60JEQfO1mu9Ax59AWgQJ0rj1OEaipR4be6Td8LxBO5SW6";
+  let zipCode = "97078";
+
+  let queryURLZip =
+    "https://cors-anywhere.herokuapp.com/http://www.zipcodeapi.com/rest/" +
+    apiKey +
+    "/info.json/" +
+    zipCode +
+    "/degrees";
+
+  $.ajax({
+    url: queryURLZip,
+    method: "GET",
+  }).then(function (response) {
+    console.log(response);
+  });
+}
