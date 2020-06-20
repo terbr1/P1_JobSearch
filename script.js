@@ -28,7 +28,8 @@ $("#submitBtn").click(function (e) {
 //Function to run search
 function runSearch() {
       //Get Zip API Search
-  let apiKey ="GXiB3oQgyIIViku46eu60JEQfO1mu9Ax59AWgQJ0rj1OEaipR4be6Td8LxBO5SW6";
+  // let apiKey ="GXiB3oQgyIIViku46eu60JEQfO1mu9Ax59AWgQJ0rj1OEaipR4be6Td8LxBO5SW6";
+  let apiKey ="wA8ZMwEvPfkmh3YIT7llqnVsWXSYaNzMZdEmaBDT95B5bQTdszojhHSPsScZ1NMd";
   
   let zipCode = $("#zipCode").val();
 
