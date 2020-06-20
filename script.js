@@ -27,12 +27,25 @@ $("#submitBtn").click(function (e) {
 
 //Function to run search
 function runSearch() {
+      //Get Zip API Search
+  let apiKey ="GXiB3oQgyIIViku46eu60JEQfO1mu9Ax59AWgQJ0rj1OEaipR4be6Td8LxBO5SW6";
+  
+  let zipCode = $("#zipCode").val();
+
+  var queryURLZip = "https://cors-anywhere.herokuapp.com/http://www.zipcodeapi.com/rest/" + apiKey +"/info.json/"+ zipCode + "/degrees";
+
+  $.ajax({
+    url: queryURLZip,
+    method: "GET",
+  }).then(function (response) {
+    let city = response.city;
+  
   //GitHub Jobs
 
   //Variable will dynamically change based on user input
   let jobType = $("#keywords").val();
 
-  var queryURLJobs = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${jobType}&page=1`;
+  var queryURLJobs = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${jobType}&location=${city}&page=1`;
 
   //AJAX Call to GitHub Jobs API
   $.ajax({
@@ -65,8 +78,7 @@ function runSearch() {
 
       let token = "561ded44bea85bd1b3058e9aeb6484da";
 
-      let queryURLNews =
-        "https://gnews.io/api/v3/search?q=" + query + "&token=" + token;
+      let queryURLNews = "https://gnews.io/api/v3/search?q=" + query + "&token=" + token;
 
       //AJAX Call to GNews API
       $.ajax({
@@ -150,24 +162,8 @@ function runSearch() {
       $("#results").append(descriptionContainer);
       $("#results").accordion("refresh");
     }
-  });
+    });
 
-  //Get Zip API Search
-  let apiKey =
-    "GXiB3oQgyIIViku46eu60JEQfO1mu9Ax59AWgQJ0rj1OEaipR4be6Td8LxBO5SW6";
-  let zipCode = "97078";
+    });
 
-  let queryURLZip =
-    "https://cors-anywhere.herokuapp.com/http://www.zipcodeapi.com/rest/" +
-    apiKey +
-    "/info.json/" +
-    zipCode +
-    "/degrees";
-
-  $.ajax({
-    url: queryURLZip,
-    method: "GET",
-  }).then(function (response) {
-    console.log(response);
-  });
-}
+};
