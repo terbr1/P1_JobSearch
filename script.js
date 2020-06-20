@@ -103,11 +103,20 @@ function runSearch() {
       //Add class to title div
       descriptionTitleDiv.addClass("title");
 
-      //Populate title div text with "full description"
-      descriptionTitleDiv.text("Full Description");
-
       //Append title div to container div
       descriptionContainer.append(descriptionTitleDiv);
+
+      //Create new dropdown icon for each description
+      let dropDownIcon = $("<i>");
+
+      dropDownIcon.addClass("dropdown icon");
+
+      dropDownIcon.val("::before");
+
+      descriptionTitleDiv.append(dropDownIcon);
+
+      //Populate title div text with "job description"
+      descriptionTitleDiv.append("Job Description");
 
       //Create new div for content
       let descriptionContentDiv = $("<div>");
@@ -119,7 +128,7 @@ function runSearch() {
       let resultDescription = $("<p>");
 
       //Give each p tag a class of description
-      //resultDescription.addClass("description");
+      resultDescription.addClass("transition hidden");
 
       //Populate each h1 with the job titles in jobTitles array
       resultTitles.text(jobTitles[i]);
