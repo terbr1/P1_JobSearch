@@ -1,3 +1,8 @@
+// Accordion Function
+$('.ui.accordion')
+  .accordion()
+;
+
 //Creating arrays to organize and store search results
 let jobTitles = [];
 let jobLocations = [];
